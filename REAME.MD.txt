@@ -1,0 +1,32 @@
+python  -m venv venv 
+
+venv\Scripts\activate
+
+pip install -r requirements.txt
+
+Install the library:
+pip install python-dotenv
+
+Create a .env file in your project root
+
+
+pip install flask-cors
+
+3. Enable CORS for Specific Routes
+from flask_cors import cross_origin
+
+app = Flask(__name__)
+
+@app.route("/api/data")
+@cross_origin()
+def get_data():
+    return {"message": "Success"}
+
+
+# Only allow requests from your local frontend (e.g., React or Vue)
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+
+
+https://127.0.0.1:5000/generate-auth-url
+https://onedinaar.com/fyers-fallback?auth_code=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBfaWQiOiJKREs1NkYzS1A1IiwidXVpZCI6IjU5MGM5MGFmMWNiMjQzYTI4MDI2ZTMxNmY5ODQ1YmY4IiwiaXBBZGRyIjoiIiwibm9uY2UiOiIiLCJzY29wZSI6IiIsImRpc3BsYXlfbmFtZSI6IlhWMzEzNjAiLCJvbXMiOiJLMSIsImhzbV9rZXkiOiJiMDliNDNiMjcxMTk2YzMyZDMzMTg4ZDgxNDZlNzcxNTEyMmNlYTE0NWFkMmQ5ODdiOGExMmNiYiIsImlzRGRwaUVuYWJsZWQiOiJOIiwiaXNNdGZFbmFibGVkIjoiTiIsImF1ZCI6IltcImQ6MVwiLFwiZDoyXCIsXCJ4OjBcIixcIng6MVwiLFwieDoyXCJdIiwiZXhwIjoxNzc4Mzg2MjA2LCJpYXQiOjE3NzgzNTYyMDYsImlzcyI6ImFwaS5sb2dpbi5meWVycy5pbiIsIm5iZiI6MTc3ODM1NjIwNiwic3ViIjoiYXV0aF9jb2RlIn0.4dZD08o7SqZ3jdJwZLgXp8bMZlMdR_JhqoqpoubJAqY&code=200&s=&state=None
+
