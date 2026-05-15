@@ -71,15 +71,15 @@ def generate_token():
     # Configure logging to track issues
     #logging.basicConfig(level=logging.INFO)
     #logger = logging.getLogger(__name__)
-
+    token = ""  # Variable created by assignment
     try:
         # Attempt to generate the token
         response = session.generate_token()
-    
+        print(f"Token generated {response} ")
         # If using requests, raise exception for 4xx/5xx responses
-        response.raise_for_status() 
+        #response.raise_for_status() 
     
-        token = response.json().get('token')
+        token = response #.json().get('token')
         print(f"Token generated successfully.")
 
     except requests.exceptions.HTTPError as http_err:
@@ -105,7 +105,7 @@ def generate_token():
 
 
 
-    return jsonify(response)
+    return jsonify(token)
 
 
 def run_flask():
