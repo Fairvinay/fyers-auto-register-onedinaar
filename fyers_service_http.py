@@ -78,7 +78,11 @@ def generate_token():
         print(f"Token generated {response} ")
         # If using requests, raise exception for 4xx/5xx responses
         #response.raise_for_status() 
-    
+        print("FULL FYERS RESPONSE:")
+        print(response)
+        print(type(response))
+
+
         token = response #.json().get('token')
         print(f"Token generated successfully.")
 
@@ -96,9 +100,14 @@ def generate_token():
         print(f"Timeout error occurred: {time_err}")
         return {"error": " request timeouts "}, 400 
     except requests.exceptions.RequestException as req_err:
+        import traceback
+        print("FULL EXCEPTION:")
+        traceback.print_exc()
+        print("ERROR TYPE:", type(req_err))
+        print("ERROR:", str(req_err))
         # Catches any other requests-related exceptions
         print(f"An error occurred during request: {req_err}")
-        return {"error": " auth_code to old or stale "}, 400 
+        return jsonify({   "success": False,  "error": str(req_err), "type": str(type(req_err))  })
     except ValueError as val_err:
         # Handles JSON decoding errors
         print(f"Error parsing JSON response: {val_err}")
