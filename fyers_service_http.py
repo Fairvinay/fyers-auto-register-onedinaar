@@ -85,22 +85,28 @@ def generate_token():
     except requests.exceptions.HTTPError as http_err:
         # Handles HTTP errors (e.g., 401 Unauthorized, 404 Not Found)
         print(f"HTTP error occurred: {http_err}")
+        return {"error": " HTTP errors  "}, 400
         # Consider raising a custom exception or returning None
     except requests.exceptions.ConnectionError as conn_err:
         # Handles DNS failures, refused connections
         print(f"Connection error occurred: {conn_err}")
+        return {"error": " DNS failures, refused connections "}, 400 
     except requests.exceptions.Timeout as time_err:
         #    Handles request timeouts
         print(f"Timeout error occurred: {time_err}")
+        return {"error": " request timeouts "}, 400 
     except requests.exceptions.RequestException as req_err:
         # Catches any other requests-related exceptions
         print(f"An error occurred during request: {req_err}")
+        return {"error": " auth_code to old or stale "}, 400 
     except ValueError as val_err:
         # Handles JSON decoding errors
         print(f"Error parsing JSON response: {val_err}")
+        return {"error": " JSON decoding error "}, 400 
     except Exception as e:
         #   Catches non-requests related exceptions (last resort)
         print(f"An unexpected error occurred: {e}")
+        return {"error": " non-requests error "}, 400 
 
 
 
